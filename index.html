@@ -9,24 +9,188 @@
     <link rel="icon" type="image/png" sizes="64x64" href="logo/logoweb.png">
     <link rel="icon" type="image/png" sizes="128x128" href="logo/logoweb.png">
     <link rel="icon" type="image/png" sizes="256x256" href="logo/logoweb.png">
+    <link rel="stylesheet" href="style.css">
 
 </head>
 <body>
     <h1 style="text-align: center;">My Calendar</h1>
-    <hr>
     <style>
-        footer {
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            table-layout: fixed;
+            border-spacing: 0;
+            border-radius: 15px;
+            overflow: hidden;
+            background-color: #20b2aa;
+            border: 1px solid black;
+            font-size: 14px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        td {
+            border: 1px solid black;
+            padding: 5px;
+            height: 50px;
+            text-align: center;
+        }
+
+        tr:first-child td {
+            font-weight: bold;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background-color: #20b2aa;
+            color: #16191b;
+        }
+        
+        body {
+            padding-bottom: 60px;
+        }
+
+        .footer {
             position: fixed;
-            bottom: 0;
-            width: 98%;
+            bottom: 20px;
+            right: 20px;
+            width: 100%;
+            margin-top: 40px;
             text-align: right;
             font-size: 20px;
-            padding: 10px;
-            background: #ffffff;
         }
     </style>
-    <footer>
+    <footer class="footer">
         Produced by <a href="https://github.com/kotsalosk">kotsalosk </a>
     </footer>
+</body>
+<body>
+    <div class="grid-container">
+
+        <div class="month-wrapper">
+            <h3 class="month-title">January</h3>
+            <table>
+                <tr> <td>Sun</td><td>Mon</td><td>Tue</td><td>Wed</td><td>Thu</td><td>Fri</td><td>Sat</td> </tr>
+                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
+                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
+                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
+        </table>
+        </div>
+
+        <div class="month-wrapper">
+            <h3 class="month-title">February</h3>
+            <table>
+                <tr> <td>Sun</td><td>Mon</td><td>Tue</td><td>Wed</td><td>Thu</td><td>Fri</td><td>Sat</td> </tr>
+                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
+                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
+                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
+        </table>
+        </div>
+
+        <div class="month-wrapper">
+            <h3 class="month-title">March</h3>
+            <table>
+                <tr> <td>Sun</td><td>Mon</td><td>Tue</td><td>Wed</td><td>Thu</td><td>Fri</td><td>Sat</td> </tr>
+                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
+                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
+                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
+        </table>
+        </div>
+
+        <div class="month-wrapper">
+            <h3 class="month-title">April</h3>
+            <table>
+                <tr> <td>Sun</td><td>Mon</td><td>Tue</td><td>Wed</td><td>Thu</td><td>Fri</td><td>Sat</td> </tr>
+                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
+                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
+                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
+        </table>
+        </div>
+
+        <div class="month-wrapper">
+            <h3 class="month-title">May</h3>
+            <table>
+                <tr> <td>Sun</td><td>Mon</td><td>Tue</td><td>Wed</td><td>Thu</td><td>Fri</td><td>Sat</td> </tr>
+                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
+                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
+                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
+        </table>
+        </div>
+
+        <div class="month-wrapper">
+            <h3 class="month-title">June</h3>
+            <table>
+                <tr> <td>Sun</td><td>Mon</td><td>Tue</td><td>Wed</td><td>Thu</td><td>Fri</td><td>Sat</td> </tr>
+                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
+                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
+                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
+        </table>
+        </div>
+
+        <div class="month-wrapper">
+            <h3 class="month-title">July</h3>
+            <table>
+                <tr> <td>Sun</td><td>Mon</td><td>Tue</td><td>Wed</td><td>Thu</td><td>Fri</td><td>Sat</td> </tr>
+                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
+                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
+                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
+        </table>
+        </div>
+
+        <div class="month-wrapper">
+            <h3 class="month-title">August</h3>
+            <table>
+                <tr> <td>Sun</td><td>Mon</td><td>Tue</td><td>Wed</td><td>Thu</td><td>Fri</td><td>Sat</td> </tr>
+                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
+                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
+                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
+        </table>
+        </div>
+
+        <div class="month-wrapper">
+            <h3 class="month-title">September</h3>
+            <table>
+                <tr> <td>Sun</td><td>Mon</td><td>Tue</td><td>Wed</td><td>Thu</td><td>Fri</td><td>Sat</td> </tr>
+                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
+                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
+                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
+        </table>
+        </div>
+
+        <div class="month-wrapper">
+            <h3 class="month-title">October</h3>
+            <table>
+                <tr> <td>Sun</td><td>Mon</td><td>Tue</td><td>Wed</td><td>Thu</td><td>Fri</td><td>Sat</td> </tr>
+                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
+                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
+                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
+        </table>
+        </div>
+
+        <div class="month-wrapper">
+            <h3 class="month-title">November</h3>
+            <table>
+                <tr> <td>Sun</td><td>Mon</td><td>Tue</td><td>Wed</td><td>Thu</td><td>Fri</td><td>Sat</td> </tr>
+                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
+                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
+                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
+        </table>
+        </div>
+
+        <div class="month-wrapper">
+            <h3 class="month-title">December</h3>
+            <table>
+                <tr> <td>Sun</td><td>Mon</td><td>Tue</td><td>Wed</td><td>Thu</td><td>Fri</td><td>Sat</td> </tr>
+                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
+                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
+                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
+        </table>
+        </div>
+    </div>
 </body>
 </html>
