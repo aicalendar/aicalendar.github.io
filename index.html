@@ -4,193 +4,134 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Calendar</title>
-    <link rel="icon" href="logo/logoweb.png" type="logo/png" width="">
-    <link rel="icon" type="image/png" sizes="32x32" href="logo/logoweb.png">
-    <link rel="icon" type="image/png" sizes="64x64" href="logo/logoweb.png">
-    <link rel="icon" type="image/png" sizes="128x128" href="logo/logoweb.png">
-    <link rel="icon" type="image/png" sizes="256x256" href="logo/logoweb.png">
+    <link rel="icon" href="logo/logoweb.png" type="image/png"> 
     <link rel="stylesheet" href="style.css">
-
 </head>
 <body>
+
     <h1 style="text-align: center;">My Calendar</h1>
-    <style>
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            padding: 20px;
-        }
+    
+    <h2 style="text-align: center;">Year : 
+        <button id="prevYear" class="nav-btn">&lt;</button>
+        <input type="number" id="yearInput" value="2026" min="1900" max="2100">
+        <button id="nextYear" class="nav-btn">&gt;</button>
+    </h2>
 
-        table {
-            width: 100%;
-            border-collapse: separate;
-            table-layout: fixed;
-            border-spacing: 0;
-            border-radius: 15px;
-            overflow: hidden;
-            background-color: #20b2aa;
-            border: 1px solid black;
-            font-size: 14px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
+    <div class="grid-container" id="calendarGrid">
+        </div>
 
-        td {
-            border: 1px solid black;
-            padding: 5px;
-            height: 50px;
-            text-align: center;
-        }
-
-        tr:first-child td {
-            font-weight: bold;
-            font-size: 16px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            background-color: #20b2aa;
-            color: #16191b;
-        }
-        
-        body {
-            padding-bottom: 60px;
-        }
-
-        .footer {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 100%;
-            margin-top: 40px;
-            text-align: right;
-            font-size: 20px;
-        }
-    </style>
     <footer class="footer">
-        Produced by <a href="https://github.com/kotsalosk">kotsalosk </a>
+        Produced by <a href="https://github.com/kotsalosk" style="color: #0805cf; text-decoration: none;">kotsalosk</a>
     </footer>
-</body>
-<body>
-    <div class="grid-container">
 
-        <div class="month-wrapper">
-            <h3 class="month-title">January</h3>
-            <table>
-                <tr> <td>Sun</td><td>Mon</td><td>Tue</td><td>Wed</td><td>Thu</td><td>Fri</td><td>Sat</td> </tr>
-                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
-                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
-                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
-        </table>
-        </div>
+    <script>
+        const months = [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+        const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+        
+        let currentYear = 2026;
 
-        <div class="month-wrapper">
-            <h3 class="month-title">February</h3>
-            <table>
-                <tr> <td>Sun</td><td>Mon</td><td>Tue</td><td>Wed</td><td>Thu</td><td>Fri</td><td>Sat</td> </tr>
-                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
-                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
-                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
-        </table>
-        </div>
+        function generateCalendar(year) {
+            const container = document.getElementById('calendarGrid');
+            
+            // Καθαρίζουμε το περιεχόμενο
+            container.innerHTML = "";
+            
+            // Ενημερώνουμε και το κουτάκι (αν κληθεί η συνάρτηση από αλλού)
+            document.getElementById('yearInput').value = year;
 
-        <div class="month-wrapper">
-            <h3 class="month-title">March</h3>
-            <table>
-                <tr> <td>Sun</td><td>Mon</td><td>Tue</td><td>Wed</td><td>Thu</td><td>Fri</td><td>Sat</td> </tr>
-                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
-                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
-                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
-        </table>
-        </div>
+            for (let month = 0; month < 12; month++) {
+                // Creation of the wrapper
+                const monthDiv = document.createElement('div');
+                monthDiv.className = 'month-wrapper';
 
-        <div class="month-wrapper">
-            <h3 class="month-title">April</h3>
-            <table>
-                <tr> <td>Sun</td><td>Mon</td><td>Tue</td><td>Wed</td><td>Thu</td><td>Fri</td><td>Sat</td> </tr>
-                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
-                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
-                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
-        </table>
-        </div>
+                const title = document.createElement('h3');
+                title.className = 'month-title';
+                title.innerText = months[month];
+                monthDiv.appendChild(title);
 
-        <div class="month-wrapper">
-            <h3 class="month-title">May</h3>
-            <table>
-                <tr> <td>Sun</td><td>Mon</td><td>Tue</td><td>Wed</td><td>Thu</td><td>Fri</td><td>Sat</td> </tr>
-                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
-                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
-                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
-        </table>
-        </div>
+                // Table creation
+                const table = document.createElement('table');
+                
+                const thead = document.createElement('tr');
+                daysOfWeek.forEach(day => {
+                    const th = document.createElement('th');
+                    th.innerText = day;
+                    thead.appendChild(th);
+                });
+                table.appendChild(thead);
 
-        <div class="month-wrapper">
-            <h3 class="month-title">June</h3>
-            <table>
-                <tr> <td>Sun</td><td>Mon</td><td>Tue</td><td>Wed</td><td>Thu</td><td>Fri</td><td>Sat</td> </tr>
-                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
-                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
-                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
-        </table>
-        </div>
+                // Calculate the dates
+                const firstDayIndex = new Date(year, month, 1).getDay(); // The starting day (0-6)
+                const daysInMonth = new Date(year, month + 1, 0).getDate(); // Days of the current month
+                const prevMonthDays = new Date(year, month, 0).getDate(); // Days of the previous month
 
-        <div class="month-wrapper">
-            <h3 class="month-title">July</h3>
-            <table>
-                <tr> <td>Sun</td><td>Mon</td><td>Tue</td><td>Wed</td><td>Thu</td><td>Fri</td><td>Sat</td> </tr>
-                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
-                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
-                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
-        </table>
-        </div>
+                let date = 1;
+                let nextMonthDate = 1;
+                let row = document.createElement('tr');
 
-        <div class="month-wrapper">
-            <h3 class="month-title">August</h3>
-            <table>
-                <tr> <td>Sun</td><td>Mon</td><td>Tue</td><td>Wed</td><td>Thu</td><td>Fri</td><td>Sat</td> </tr>
-                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
-                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
-                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
-        </table>
-        </div>
+                // Loop for all the cages (42 cells)
+                for (let i = 0; i < 42; i++) {
+                    const cell = document.createElement('td');
 
-        <div class="month-wrapper">
-            <h3 class="month-title">September</h3>
-            <table>
-                <tr> <td>Sun</td><td>Mon</td><td>Tue</td><td>Wed</td><td>Thu</td><td>Fri</td><td>Sat</td> </tr>
-                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
-                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
-                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
-        </table>
-        </div>
+                    // CASE 1: Days of the previous month
+                    if (i < firstDayIndex) {
+                        const prevDate = prevMonthDays - (firstDayIndex - 1 - i);
+                        cell.innerText = prevDate;
+                        cell.className = "other-month"; 
+                    }
+                    // CASE 2: Days of the current month
+                    else if (date <= daysInMonth) {
+                        cell.innerText = date;
+                        date++;
+                    }
+                    // CASE 3: Days of the next month
+                    else {
+                        cell.innerText = nextMonthDate;
+                        cell.className = "other-month";
+                        nextMonthDate++;
+                    }
 
-        <div class="month-wrapper">
-            <h3 class="month-title">October</h3>
-            <table>
-                <tr> <td>Sun</td><td>Mon</td><td>Tue</td><td>Wed</td><td>Thu</td><td>Fri</td><td>Sat</td> </tr>
-                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
-                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
-                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
-        </table>
-        </div>
+                    row.appendChild(cell);
 
-        <div class="month-wrapper">
-            <h3 class="month-title">November</h3>
-            <table>
-                <tr> <td>Sun</td><td>Mon</td><td>Tue</td><td>Wed</td><td>Thu</td><td>Fri</td><td>Sat</td> </tr>
-                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
-                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
-                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
-        </table>
-        </div>
+                    // Every 7 days change the line
+                    if ((i + 1) % 7 === 0) {
+                        table.appendChild(row);
+                        row = document.createElement('tr');
+                    }
+                }
 
-        <div class="month-wrapper">
-            <h3 class="month-title">December</h3>
-            <table>
-                <tr> <td>Sun</td><td>Mon</td><td>Tue</td><td>Wed</td><td>Thu</td><td>Fri</td><td>Sat</td> </tr>
-                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
-                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
-                <tr> <td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td><td>•</td> </tr>
-        </table>
-        </div>
-    </div>
+                monthDiv.appendChild(table);
+                container.appendChild(monthDiv);
+            }
+        }
+
+        // Running
+        const yearInput = document.getElementById('yearInput');
+        
+        // Ιnitial execution 
+        generateCalendar(parseInt(yearInput.value));
+
+        // It's for the typing of the year
+        yearInput.addEventListener('change', () => {
+            const newYear = parseInt(yearInput.value);
+            if (newYear > 0) { 
+                generateCalendar(newYear);
+            }
+        });
+
+        // Buttons
+        document.getElementById('prevYear').addEventListener('click', () => {
+            yearInput.value = parseInt(yearInput.value) - 1; 
+            generateCalendar(parseInt(yearInput.value));    
+        });
+
+        document.getElementById('nextYear').addEventListener('click', () => {
+            yearInput.value = parseInt(yearInput.value) + 1; 
+            generateCalendar(parseInt(yearInput.value));    
+        });
+    </script>
 </body>
 </html>
