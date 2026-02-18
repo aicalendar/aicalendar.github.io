@@ -19,6 +19,7 @@ h2 {
     width: fit-content;
     margin: 0 auto;
     padding: 5px 15px;
+    gap: 5px;
 }
 
 /* The footer color */
@@ -131,7 +132,7 @@ th {
     color: #f7f7f7;             
     font-size: 25px;              
     font-weight: bold;
-    width: 70px;              
+    width: 60px;              
     text-align: center;   
     cursor: text;      
     outline: none;          
