@@ -1,30 +1,36 @@
 /* The backgound color of the site */
 body {
-    background-color: #16191b;
+    margin: 0;
+    padding: 0;
     font-family: Arial, Helvetica, sans-serif;
+    background: radial-gradient(circle at top left, #0f172a, #0b1120 60%);
+    color: #e5e7eb;
 }
 
 /* The style of the 1st header (My Calendar)*/
 h1 {
-    color: #f7f7f7;
-    border: 2px solid #20b2aa;
+    color: #e5e7eb;
+    border: 2px solid #3b82f6;
     border-radius: 20px;
+    padding: 10px 20px;
+    width: fit-content;
+    margin: 20px auto;
+    margin-bottom: 35px;
 }
 
 /* The style of the 2nd header, what is the current year. */
 h2 {
-    color: #f7f7f7;
-    border: 2px solid #20b2aa;
+    color: #e5e7eb;
+    border: 2px solid #3b82f6;
     border-radius: 20px;
     width: fit-content;
-    margin: 0 auto;
-    padding: 5px 15px;
-    gap: 5px;
+    margin: 0 auto 20px auto;
+    padding: 5px 20px;
 }
 
 /* The footer color */
 footer {
-    color: #eeeeee;
+    color: #f1f5f9;
 }
 
 /* Style of the footer */
@@ -46,9 +52,8 @@ footer {
 
 /* The style of the month headers */
 .month-title {
-    color: #eeeeee;
+    color: #f1f5f9;
     margin-bottom: 10px;
-    margin-top: 0;
     font-size: 18px;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -59,7 +64,7 @@ footer {
 .grid-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /*In every line we have 3 arrays.*/
-    gap: 15px;
+    gap: 25px;
     padding: 20px;
     max-width: 1400px;
     margin: 0 auto;
@@ -68,41 +73,50 @@ footer {
 /* The table of every month */
 table {
     width: 100%;
-    border-collapse: separate;
+    border-collapse: collapse;
     table-layout: fixed;
-    border-spacing: 1px; /*or 2px*/
-    border-radius: 15px; /*or 10px*/
+    background-color: #111827;
+    border-radius: 15px;
     overflow: hidden;
-    background-color: #20b2aa;
-    border: 4px solid black;
-    font-size: 14px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* or 0 4px 10px rgba(0,0,0,0.3)*/
+    border: 1px solid #1f2937;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
 }
 
 /* Style of the cages. */
 td {
-    background-color: #20b2aa;
-    color: #16191b;
-    border: 1px solid black;
-    padding: 3px;
-    height: 35px;
+    background-color: #1e293b;
+    color: #e5e7eb;
+    border: 1px solid #1f2937;
+    height: 40px;
     text-align: center;
-    border-radius: 3px;
-    font-size: 17px;
-    font-weight: bolder;
-    cursor: default;
+    font-size: 15px;
+    font-weight: bold;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+td:hover {
+    color: white;
+    transform: scale(1.02);
 }
 
 /* Style of the cages of next or previous month */
-td.other-month {
-    background-color: #cfcfcf;          
-    opacity: 0.5;              
+.other-month {
+    background-color: #0f172a;
+    color: #475569;
+}
+
+/* Zoom of the button */
+table:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(34, 211, 238, 0.2);
 }
 
 /* The header of the days. */
 th {
     background-color: #16191b;
-    color: #20b2aa;
+    color: #6366f1;
     padding: 5px 0;
     font-size: 14px;
     text-transform: uppercase;
@@ -110,36 +124,36 @@ th {
 
 /*For the style of buttons of the year.*/
 .nav-btn {
-    font-size: 20px; 
+    font-size: 22px;
     background-color: transparent;
     border: none;
-    cursor: pointer; 
-    color: #20b2aa;  
+    cursor: pointer;
+    color: #3b82f6;
     font-weight: bold;
-    transition: transform 0.2s;
+    transition: transform 0.2s ease, color 0.2s ease;
 }
 
 /* When you put the mouse in it, it's getting bigger */
 .nav-btn:hover {
     transform: scale(1.2);
-    color: #07e2d7;
+    color: #22d3ee;
 }
 
 /* Style of the year typing */
 #yearInput {
     background-color: transparent;
-    border: none;                  
-    color: #f7f7f7;             
-    font-size: 25px;              
+    border: none;
+    color: #e5e7eb;
+    font-size: 25px;
     font-weight: bold;
-    width: 60px;              
-    text-align: center;   
-    cursor: text;      
-    outline: none;          
+    width: 80px;
+    text-align: center;
+    outline: none;
 }
 
+/* The shadow of the month cage */
 #yearInput:focus {
-    border-bottom: 2px solid #20b2aa; 
+   border-bottom: 2px solid #22d3ee; 
 }
 
 #yearInput {
@@ -151,6 +165,10 @@ th {
 #yearInput::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+
+#yearInput {
+    appearance: textfield;
 }
 
 /* 2 columns for the tablet users */
