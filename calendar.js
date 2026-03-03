@@ -115,16 +115,24 @@ function generateYearView() {
 function generateSingleMonth() {
     const params = new URLSearchParams(window.location.search);
     let year  = parseInt(params.get('year'))  || new Date().getFullYear();
-    let month = parseInt(params.get('month')) || 0; // 0-based
+    let month = parseInt(params.get('month')) || 0;
 
-    function render() {
-        document.getElementById('monthTitle').innerText =
-            `${months[month]} ${year}`;
+    document.getElementById('monthTitle').innerText = `${months[month]} ${year}`;
 
-        const container = document.getElementById('singleMonth');
-        container.innerHTML = "";
-        container.appendChild(buildMonthTable(year, month));
-    }
+    const container = document.getElementById('singleMonth');
+    container.appendChild(buildMonthTable(year, month, true)); // day click enabled
+}
 
-    render();
+// SINGLE DAY VIEW (day.html)
+function generateDayView() {
+    const params = new URLSearchParams(window.location.search);
+    const year  = parseInt(params.get('year'))  || new Date().getFullYear();
+    const month = parseInt(params.get('month')) ?? 0;
+    const day   = parseInt(params.get('day'))   || 1;
+
+    const date = new Date(year, month, day);
+    const dayName = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"][date.getDay()];
+
+    document.getElementById('dayTitle').innerText =
+        `${dayName}, ${months[month]} ${day} ${year}`;
 }
