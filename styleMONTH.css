@@ -80,6 +80,7 @@ td {
 
 td:hover {
     color: white;
+    outline: 2px solid #0f172a;
     transform: scale(1.02);
 }
 
