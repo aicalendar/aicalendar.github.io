@@ -136,3 +136,38 @@ function generateDayView() {
     document.getElementById('dayTitle').innerText =
         `${dayName}, ${months[month]} ${day} ${year}`;
 }
+
+generateDayView = function() {
+    const params = new URLSearchParams(window.location.search);
+    const year  = parseInt(params.get('year'))  || new Date().getFullYear();
+    const month = parseInt(params.get('month')) ?? 0;
+    const day   = parseInt(params.get('day'))   || 1;
+
+    const date = new Date(year, month, day);
+    const dayName = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"][date.getDay()];
+
+    document.getElementById('dayTitle').innerText =
+        `${dayName}, ${months[month]} ${day}, ${year}`;
+
+    // Build 24-hour grid
+    const grid = document.getElementById('hourGrid');
+    const table = document.createElement('table');
+    table.className = 'hour-table';
+
+    for (let h = 0; h < 24; h++) {
+        const row = document.createElement('tr');
+
+        const timeCell = document.createElement('td');
+        timeCell.className = 'hour-label';
+        timeCell.innerText = String(h).padStart(2, '0') + ':00';
+
+        const noteCell = document.createElement('td');
+        noteCell.className = 'hour-note';
+
+        row.appendChild(timeCell);
+        row.appendChild(noteCell);
+        table.appendChild(row);
+    }
+
+    grid.appendChild(table);
+}
