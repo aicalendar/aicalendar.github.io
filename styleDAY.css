@@ -16,9 +16,8 @@ h2 {
     width: fit-content;
     margin: 20px auto;
     margin-bottom: 35px;
-    font-size: 28px;
+    font-size: 24px;
     letter-spacing: 1px;
-    text-transform: uppercase
 }
 
 /* The footer color */
@@ -34,4 +33,29 @@ footer {
     width: 100%;
     text-align: right;
     font-size: 20px;
+}
+
+/* 2nd column */
+.hour-table {
+    width: 95%;
+    margin: 30px auto;
+    border-collapse: collapse;
+}
+
+/* Hour column (1st one) */
+.hour-label {
+    width: 70px;
+    padding: 10px 14px;
+    font-weight: bold;
+    text-align: center;
+    font-size: 17px;
+    border: 2px solid #444;
+    white-space: nowrap;
+}
+
+/* The line between the two columns */
+.hour-note {
+    border: 2px solid #444;
+    padding: 10px;
+    height: 45px;
 }
