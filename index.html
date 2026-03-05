@@ -20,10 +20,48 @@
     <div class="grid-container" id="calendarGrid">
         </div>
 
+    <div id="authModal">
+        <div class="modal-box">
+            <h2>AI Calendar</h2>
+            <p>Sign in to access your calendar</p>
+
+            <!-- Google -->
+            <button id="googleSignIn" class="auth-btn google-btn">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
+                Continue with Google
+            </button>
+
+            <div class="auth-divider"><span>or</span></div>
+
+            <!-- Email/Password -->
+            <input type="email" id="emailInput" placeholder="Email address" class="auth-input">
+            <input type="password" id="passwordInput" placeholder="Password" class="auth-input">
+
+            <button id="emailSignIn" class="auth-btn email-btn">Continue</button>
+
+            <p id="authError" class="auth-error"></p>
+
+            <p class="auth-switch">
+                Don't have an account? <span id="switchToRegister">Register</span>
+            </p>
+        </div>
+    </div>
+
+    <div id="mainContent">
+        <div id="userBar">
+            <span id="userInfo"></span> 
+            
+            <img id="userProfilePic" src="" alt="Profile Picture" style="display: none;">
+            
+            <button id="signOutBtn">Sign out</button>
+        </div> 
+    </div>
+
     <footer class="footer">
         Produced by <a href="https://github.com/kotsalosk" style="color: #0805cf; text-decoration: none;">kotsalosk</a>
     </footer>
 
+    <script type="module" src="auth.js"></script>
     <script src="calendar.js"></script>
     <script>
         generateYearView();
