@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
-import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
+import { getAuth, signInWithRedirect, getRedirectResult, GoogleAuthProvider, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA7I4hOdQkGlOCoYipZmiIXpbW7r2TwEZA",
@@ -50,11 +50,11 @@ onAuthStateChanged(auth, (user) => {
 
 // Google Sign-In
 document.getElementById('googleSignIn').addEventListener('click', () => {
-    signInWithPopup(auth, provider).catch((err) => {
-        if (err.code !== 'auth/popup-closed-by-user') {
-            showError(err.message);
-        }
-    });
+    signInWithRedirect(auth, provider);
+});
+
+getRedirectResult(auth).catch((err) => {
+    if (err) showError(err.message);
 });
 
 // Email Sign-In or Register
