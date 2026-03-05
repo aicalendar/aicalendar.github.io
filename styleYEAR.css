@@ -171,6 +171,189 @@ th {
     appearance: textfield;
 }
 
+/* ----- GOOGLE SING IN/OUT STYLING ----- */
+/* --- AUTH MODAL --- */
+#authModal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* Sign-in box */
+.modal-box {
+    background: #1e1e2e;
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+    width: 340px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+}
+
+/* Styling of the second header(Welcome to AI Calendar) */
+.modal-box h2 {
+    margin-bottom: 8px;
+    color: #fff;
+}
+
+/* Styling of the text in the log in box */
+.modal-box p {
+    color: #aaa;
+    margin-bottom: 24px;
+    font-size: 0.9rem;
+}
+
+/* --- Buttons & Input Fields --- */
+.auth-btn, #googleSignIn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-bottom: 10px;
+}
+
+/* Styling of the google button */
+.google-btn, #googleSignIn {
+    background: #fff;
+    color: #333;
+}
+
+/* Reaction of the button google */
+.google-btn:hover, #googleSignIn:hover { background: #f0f0f0; }
+
+/* Styling of the google button */
+.google-btn img, #googleSignIn img { 
+    width: 20px; height: 20px; 
+}
+
+/* Styling of the email button(Register or Login) */
+.email-btn {
+    background: #3b82f6;
+    color: #fff;
+}
+
+.email-btn:hover { background: #2563eb; }
+
+/* The input email and password */
+.auth-input {
+    width: 100%;
+    padding: 11px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1px solid #374151;
+    background: #111827;
+    color: #e5e7eb;
+    font-size: 0.95rem;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.auth-input:focus { border-color: #3b82f6; }
+
+/* The styling between google sign-in and email sign-in */
+.auth-divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 12px 0;
+    color: #6b7280;
+    font-size: 0.85rem;
+}
+
+/* Two horizontal lines in sign-in box*/
+.auth-divider::before,
+.auth-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #374151;
+}
+
+/* Email error message */
+.auth-error {
+    color: #f87171;
+    font-size: 0.85rem;
+    min-height: 20px;
+    margin: 4px 0;
+}
+
+/* Styling the text (Don't have an account?Register) */
+.auth-switch {
+    color: #9ca3af;
+    font-size: 0.85rem;
+    margin-top: 12px;
+}
+
+/* The link in register or login */
+.auth-switch span {
+    color: #3b82f6;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.auth-switch span:hover { color: #22d3ee; }
+
+
+/* --- MAIN CONTENT & USER BAR --- */
+#mainContent { 
+    display: none; 
+}
+
+/* Styling of the user inforamations */
+#userBar {
+    position: absolute; 
+    top: 5px;          
+    right: 5px;        
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    padding: 5px;
+}
+
+/* Styling of the profile picture */
+#userProfilePic {
+    width: 45px;         
+    height: 45px;       
+    border-radius: 50%; 
+    object-fit: cover;   
+}
+
+/* The styling of the user name */
+#userInfo {
+    color: #aaa;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+/* Styling of the sign out button */
+#signOutBtn {
+    padding: 6px 14px;
+    border-radius: 6px;
+    border: 1px solid #555;
+    background: transparent;
+    color: #ccc;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+}
+
+#signOutBtn:hover {
+    background: #333;
+}
+
 /* 2 columns for the tablet users */
 @media (max-width: 900px) {
     .grid-container {
