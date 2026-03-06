@@ -59,3 +59,12 @@ footer {
     padding: 10px;
     height: 45px;
 }
+
+.hour-note[contenteditable="true"]:focus {
+    outline: 2px solid #3b82f6;
+    background-color: rgba(59, 130, 246, 0.08);
+}
+
+.hour-note[contenteditable="true"]:not(:empty) {
+    color: #22d3ee;
+}
