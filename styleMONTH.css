@@ -22,9 +22,7 @@ h1 {
 }
 
 /* The footer color */
-footer {
-    color: #f1f5f9;
-}
+footer { color: #f1f5f9; }
 
 /* Style of the footer */
 .footer {
@@ -79,7 +77,6 @@ td {
 }
 
 td:hover {
-    color: white;
     outline: 2px solid #0f172a;
     transform: scale(1.02);
 }
@@ -89,8 +86,8 @@ th {
     background-color: #16191b;
     color: #6366f1;
     padding: 10px 0;
-    font-size: 18px;
-    height: 25px;
+    font-size: 16px;
+    height: 10px;
     text-transform: uppercase;
 }
 
