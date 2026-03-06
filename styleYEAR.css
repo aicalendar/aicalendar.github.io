@@ -29,9 +29,7 @@ h2 {
 }
 
 /* The footer color */
-footer {
-    color: #f1f5f9;
-}
+footer { color: #f1f5f9; }
 
 /* Style of the footer */
 .footer {
@@ -96,10 +94,7 @@ td {
     transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
-td:hover {
-    color: white;
-    transform: scale(1.02);
-}
+td:hover { transform: scale(1.02); }
 
 /* Style of the cages of next or previous month */
 .other-month {
@@ -156,9 +151,7 @@ th {
    border-bottom: 2px solid #22d3ee; 
 }
 
-#yearInput {
-    appearance: textfield;
-}
+#yearInput { appearance: textfield; }
 
 /* Hide the arrows of the typing */
 #yearInput::-webkit-outer-spin-button,
@@ -167,9 +160,7 @@ th {
     margin: 0;
 }
 
-#yearInput {
-    appearance: textfield;
-}
+#yearInput { appearance: textfield; }
 
 /* ----- GOOGLE SING IN/OUT STYLING ----- */
 /* --- AUTH MODAL --- */
@@ -307,9 +298,7 @@ th {
 
 
 /* --- MAIN CONTENT & USER BAR --- */
-#mainContent { 
-    display: none; 
-}
+#mainContent { display: none; }
 
 /* Styling of the user inforamations */
 #userBar {
@@ -347,6 +336,7 @@ th {
     color: #ccc;
     cursor: pointer;
     font-size: 0.9rem;
+    font-weight: bold;
     transition: background 0.2s;
 }
 
