@@ -15,12 +15,17 @@
     
     <h2 id="dayTitle" style="text-align: center;"></h2>
 
+    <div id="loader" style="
+        position:fixed; inset:0;
+        background: radial-gradient(circle at top left, #0f172a, #0b1120 60%);
+        display:flex; align-items:center; justify-content:center;
+        z-index:9999; font-size:2rem; color:#3b82f6;">
+        Loading...
+    </div>
+
     <div id="hourGrid"></div>
 
-    <script src="calendar.js"></script>
-    <script>
-        generateDayView();
-    </script>
+    <script type="module" src="planday.js"></script>
 
 </body>
 </html>
