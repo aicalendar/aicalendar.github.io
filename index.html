@@ -5,67 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Calendar</title>
     <link rel="icon" href="logo/logoweb.png" type="image/png"> 
-    <link rel="stylesheet" href="styleYEAR.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <h1 style="text-align: center;">My Calendar</h1>
-    
-    <h2 style="text-align: center;">Year : 
-        <button id="prevYear" class="nav-btn">&lt;</button>
-        <input type="number" id="yearInput" value="2026" min="1900" max="2100">
-        <button id="nextYear" class="nav-btn">&gt;</button>
-    </h2>
-
-    <div class="grid-container" id="calendarGrid">
-        </div>
 
     <div id="authModal">
         <div class="modal-box">
             <h2>AI Calendar</h2>
             <p>Sign in to access your calendar</p>
-
-            <!-- Google -->
             <button id="googleSignIn" class="auth-btn google-btn">
                 <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
                 Continue with Google
             </button>
-
             <div class="auth-divider"><span>or</span></div>
-
-            <!-- Email/Password -->
             <input type="email" id="emailInput" placeholder="Email address" class="auth-input">
             <input type="password" id="passwordInput" placeholder="Password" class="auth-input">
-
             <button id="emailSignIn" class="auth-btn email-btn">Continue</button>
-
             <p id="authError" class="auth-error"></p>
-
-            <p class="auth-switch">
-                Don't have an account? <span id="switchToRegister">Register</span>
-            </p>
+            <p class="auth-switch">Don't have an account? <span id="switchToRegister">Register</span></p>
         </div>
     </div>
 
-    <div id="mainContent">
+    <div id="mainContent" style="display: none;">
+        
+    <div id="viewSelector" class="dropdown">
+        <button class="dropbtn" id="currentViewBtn">Year <span>&#9662;</span></button>
+            <div class="dropdown-content">
+                <a href="#" data-view="day">Day</a>
+                <a href="#" data-view="month">Month</a>
+                <a href="#" data-view="year">Year</a>
+            </div>
+        </div>
+
         <div id="userBar">
             <span id="userInfo"></span> 
-            
             <img id="userProfilePic" src="" alt="Profile Picture" style="display: none;">
-            
             <button id="signOutBtn">Sign out</button>
         </div> 
+
+        <div id="app-container"></div>
     </div>
 
     <footer class="footer">
         Produced by <a href="https://github.com/kotsalosk" style="color: #0805cf; text-decoration: none;">kotsalosk</a>
     </footer>
 
-    <script type="module" src="auth.js"></script>
-    <script src="calendar.js"></script>
-    <script>
-        generateYearView();
-    </script>
+    <script type="module" src="app.js"></script>
     
 </body>
 </html>
