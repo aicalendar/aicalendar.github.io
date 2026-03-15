@@ -1,0 +1,459 @@
+/* The backgound color of the site */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: radial-gradient(circle at top left, #0f172a, #0b1120 60%);
+    color: #e5e7eb;
+}
+
+/* The style of the 1st header (My Calendar)*/
+h1 {
+    color: #e5e7eb;
+    border: 2px solid #3b82f6;
+    border-radius: 20px;
+    padding: 10px 20px;
+    width: fit-content;
+    margin: 20px auto;
+    margin-bottom: 35px;
+}
+
+/* The style of the 2nd header, what is the current year. */
+h2 {
+    color: #e5e7eb;
+    border: 2px solid #3b82f6;
+    border-radius: 20px;
+    width: fit-content;
+    margin: 0 auto 20px auto;
+    padding: 5px 20px;
+}
+
+/* The footer color */
+footer { color: #f1f5f9; }
+
+/* Style of the footer */
+.footer {
+    position: fixed;
+    bottom: 10px;
+    right: 20px;
+    width: 100%;
+    text-align: right;
+    font-size: 20px;
+}
+
+/*For the style of buttons of the year.*/
+.nav-btn {
+    font-size: 22px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #3b82f6;
+    font-weight: bold;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+/* When you put the mouse in it, it's getting bigger */
+.nav-btn:hover {
+    transform: scale(1.2);
+    color: #22d3ee;
+}
+
+/* Style of the year typing */
+#yearInput {
+    background-color: transparent;
+    border: none;
+    color: #e5e7eb;
+    font-size: 25px;
+    font-weight: bold;
+    width: 80px;
+    text-align: center;
+    outline: none;
+}
+
+/* The shadow of the month cage */
+#yearInput:focus {
+   border-bottom: 2px solid #22d3ee; 
+}
+
+#yearInput { appearance: textfield; }
+
+/* Hide the arrows of the typing */
+#yearInput::-webkit-outer-spin-button,
+#yearInput::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Grid & Tables (Shared) */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    background-color: #111827;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid #1f2937;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+/* The header of the days. */
+th {
+    background-color: #16191b;
+    color: #6366f1;
+    padding: 5px 0;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+/* Style of the cages. */
+td {
+    background-color: #1e293b;
+    color: #e5e7eb;
+    border: 1px solid #1f2937;
+    height: 40px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+/* Style of the cages of next or previous month */
+.other-month {
+    background-color: #0f172a;
+    color: #475569;
+}
+
+/* Year View */
+/* The grid arrangement*/
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /*In every line we have 3 arrays.*/
+    gap: 25px;
+    padding: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* The month names arrangement */
+.month-wrapper { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+}
+
+/* The style of the month headers */
+.month-title { 
+    color: #f1f5f9; 
+    margin-bottom: 10px; 
+    font-size: 18px; 
+    text-transform: uppercase; 
+    letter-spacing: 2px; 
+    font-weight: bold;
+}
+
+.year-table { 
+    width: 100%; 
+    table-layout: fixed; 
+    cursor: pointer; 
+}
+
+.year-table td { 
+    height: 40px; 
+    text-align: center; 
+    font-size: 15px; 
+    font-weight: bold; 
+}
+
+.year-table:hover { 
+    transform: translateY(-5px); 
+    box-shadow: 0 15px 35px rgba(34, 211, 238, 0.2); 
+}
+
+/* Month View */
+.single-month-container { 
+    max-width: 1400px; 
+    margin: 0 auto; 
+    padding: 20px; 
+    width: 90%; 
+}
+
+.month-table { 
+    width: 100%; 
+    height: 70vh; 
+    margin: 0 auto; 
+    cursor: pointer; 
+    box-shadow: 0 15px 35px rgba(34, 211, 238, 0.2); 
+}
+
+.month-table th { 
+    padding: 10px 0; 
+    font-size: 16px; 
+    height: 10px; 
+}
+
+.month-table td { 
+    aspect-ratio: 1 / 1; 
+    text-align: left; 
+    vertical-align: top; 
+    padding: 15px; 
+    font-size: 17px; 
+    font-weight: bold; 
+}
+
+.month-table td:hover { 
+    outline: 2px solid #0f172a; 
+    transform: scale(1.02); 
+}
+
+/* Day View */
+#dayTitle, .view-title {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.hour-table { 
+    width: 95%; 
+    margin: 30px auto; 
+    border-collapse: collapse; 
+    border-radius: 15px; 
+    box-shadow: 0 15px 35px rgba(34, 211, 238, 0.2); 
+}
+
+/* Hour column (1st one) */
+.hour-label {
+    width: 70px;
+    padding: 10px 14px;
+    font-weight: bold;
+    text-align: center;
+    font-size: 17px;
+    border: 2px solid #444;
+    white-space: nowrap;
+}
+
+/* The line between the two columns */
+.hour-note {
+    border: 2px solid #444;
+    padding: 10px;
+    height: 45px;
+    text-align: left; 
+    cursor: text;    
+    vertical-align: middle; 
+}
+
+.hour-note[contenteditable="true"]:focus {
+    outline: 2px solid #3b82f6;
+    background-color: rgba(59,130,246,0.08);
+}
+
+.hour-note[contenteditable="true"]:not(:empty) { color: #ffffff; }
+
+/* 2 columns for the tablet users */
+@media (max-width: 900px) {
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* 1 column for the phone users */
+@media (max-width: 600px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Auth CSS  */
+#authModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(1.5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-box { 
+    background: #1e1e2e; 
+    border-radius: 16px; 
+    padding: 40px; 
+    text-align: center; 
+    width: 340px; 
+}
+
+.modal-box h2 { 
+    margin-bottom: 8px; 
+    color: #fff; 
+}
+
+.modal-box p { 
+    color: #aaa; 
+    margin-bottom: 24px; 
+    font-size: 0.9rem; 
+}
+
+.auth-btn { 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 10px; 
+    width: 100%; 
+    padding: 12px; 
+    border: none; 
+    border-radius: 8px; 
+    font-size: 1rem; 
+    font-weight: bold; 
+    cursor: pointer; 
+    margin-bottom: 10px; 
+}
+
+.google-btn { background: #fff; color: #333; }
+
+.google-btn img { width: 20px; height: 20px; }
+
+.email-btn { background: #3b82f6; color: #fff; }
+
+.auth-input { 
+    width: 100%; 
+    padding: 11px; 
+    margin-bottom: 10px; 
+    border-radius: 8px; 
+    border: 1px solid #374151; 
+    background: #111827; 
+    color: #e5e7eb; 
+    box-sizing: border-box; 
+}
+
+.auth-divider { 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    margin: 12px 0; 
+    color: #6b7280; 
+    font-size: 0.85rem; 
+}
+
+.auth-divider::before, .auth-divider::after { 
+    content: ''; 
+    flex: 1; 
+    height: 1px; 
+    background: #374151; 
+}
+
+.auth-error { 
+    color: #f87171; 
+    font-size: 0.85rem; 
+    margin: 4px 0; 
+}
+
+.auth-switch span { 
+    color: #3b82f6; 
+    cursor: pointer; 
+    font-weight: bold; 
+}
+
+#userBar { 
+    position: absolute; 
+    top: 5px; 
+    right: 5px; 
+    display: flex; 
+    align-items: center; 
+    gap: 12px; 
+    padding: 5px; 
+}
+
+#userProfilePic { 
+    width: 45px; 
+    height: 45px; 
+    border-radius: 50%; 
+    object-fit: cover; 
+}
+
+#signOutBtn { 
+    padding: 6px 14px; 
+    border-radius: 6px; 
+    border: 1px solid #555; 
+    background: transparent; 
+    color: #ccc; 
+    cursor: pointer; 
+    font-weight: bold; 
+}
+
+/* --- VIEW SELECTOR DROPDOWN (Top Left) --- */
+#viewSelector {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    z-index: 1000;
+}
+
+.dropbtn {
+    background-color: transparent;
+    color: #e5e7eb;
+    padding: 8px 16px;
+    font-size: 16px;
+    border: 1px solid #555;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.dropbtn:hover {
+    background-color: #1e293b;
+    border-color: #3b82f6;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    z-index: 1000;
+    background-color: #1e1e2e;
+    min-width: 150px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.6);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 8px;
+    border: 1px solid #333;
+}
+
+.dropdown-content a {
+    color: #e5e7eb;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
+}
+
+.dropdown-content a:hover {
+    background-color: #3b82f6;
+}
+
+.dropdown-content.show {
+    display: block;
+}
+
+.shortcut {
+    color: #9ca3af;
+    font-size: 0.8rem;
+    font-weight: normal;
+}
+
+.dropdown-content a:hover .shortcut {
+    color: #fff;
+}
