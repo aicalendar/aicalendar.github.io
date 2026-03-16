@@ -234,29 +234,94 @@ function renderMonthView(container) {
 }
 
 // SINGLE DAY VIEW
+let currentDocRef = null;
+ 
+async function saveAllTasks() {
+    if (!currentDocRef) return;
+    const allData = {};
+    document.querySelectorAll('.hour-note').forEach(cell => {
+        const h = cell.getAttribute('data-hour');
+        const tasks = [];
+        cell.querySelectorAll('.task-item').forEach(item => {
+            const text = item.querySelector('.task-text').innerText.trim();
+            if (text) tasks.push({ text, done: item.classList.contains('done') });
+        });
+        if (tasks.length) allData[`h${h}`] = tasks;
+    });
+    await setDoc(currentDocRef, allData);
+}
+ 
+function createTaskItem(text, done) {
+    const item = document.createElement('div');
+    item.className = 'task-item' + (done ? ' done' : '');
+ 
+    const bullet = document.createElement('span');
+    bullet.className = 'task-bullet';
+    bullet.title = 'Click to complete';
+ 
+    const textEl = document.createElement('span');
+    textEl.className = 'task-text';
+    textEl.contentEditable = true;
+    textEl.innerText = text;
+    textEl.spellcheck = false;
+ 
+    // Enter → new task below
+    textEl.addEventListener('keydown', e => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            const newItem = createTaskItem('', false);
+            item.insertAdjacentElement('afterend', newItem);
+            newItem.querySelector('.task-text').focus();
+        }
+        // Backspace on empty → remove task
+        if (e.key === 'Backspace' && textEl.innerText === '') {
+            e.preventDefault();
+            const prev = item.previousElementSibling;
+            item.remove();
+            if (prev) prev.querySelector('.task-text')?.focus();
+            saveAllTasks();
+        }
+    });
+ 
+    textEl.addEventListener('blur', () => {
+    if (textEl.innerText.trim() === '') {
+        item.remove();
+    }
+    saveAllTasks();
+    });
+ 
+    // Click bullet → toggle done
+    bullet.addEventListener('click', () => {
+        item.classList.toggle('done');
+        saveAllTasks();
+    });
+ 
+    item.appendChild(bullet);
+    item.appendChild(textEl);
+    return item;
+}
+
 async function renderDayView(container) {
     const fullDate = new Date(state.year, state.month, state.day);
-    const dayName = daysOfWeekFull[fullDate.getDay()]; 
-
+    const dayName  = daysOfWeekFull[fullDate.getDay()];
+ 
     const header = document.createElement('div');
     header.style.textAlign = 'center';
     header.innerHTML = `<h2 class="view-title" id="dayTitle">${dayName} ${months[state.month]} ${state.day}, ${state.year}</h2>`;
     container.appendChild(header);
-
-    const grid = document.createElement('div');
+ 
+    const grid  = document.createElement('div');
     const table = document.createElement('table');
     table.className = 'hour-table';
-
     container.appendChild(grid);
     grid.appendChild(table);
 
     // --- FIRESTORE LOGIC FOR THIS DAY ---
     if (!state.currentUser) return;
     const dateKey = `${state.year}-${String(state.month+1).padStart(2,'0')}-${String(state.day).padStart(2,'0')}`;
-    const docRef = doc(db, 'users', state.currentUser.uid, 'plans', dateKey);
-    
-    const docSnap = await getDoc(docRef);
-    const savedNotes = docSnap.exists() ? docSnap.data() : {};
+    currentDocRef = doc(db, 'users', state.currentUser.uid, 'plans', dateKey);
+    const docSnap = await getDoc(currentDocRef);
+    const saved = docSnap.exists() ? docSnap.data() : {};
 
     for (let h = 0; h < 24; h++) {
         const row = document.createElement('tr');
@@ -266,17 +331,26 @@ async function renderDayView(container) {
 
         const noteCell = document.createElement('td');
         noteCell.className = 'hour-note';
-        noteCell.contentEditable = true;
-        noteCell.innerText = savedNotes[`h${h}`] || '';
         noteCell.setAttribute('data-hour', h);
 
-        noteCell.addEventListener('blur', async () => {
-            const allNotes = {};
-            document.querySelectorAll('.hour-note').forEach(cell => {
-                const hr = cell.getAttribute('data-hour');
-                if (cell.innerText.trim()) allNotes[`h${hr}`] = cell.innerText.trim();
-            });
-            await setDoc(docRef, allNotes);
+        // Load saved tasks or show empty first task
+        const savedTasks = saved[`h${h}`];
+        if (savedTasks && savedTasks.length) {
+            savedTasks.forEach(t => noteCell.appendChild(createTaskItem(t.text, t.done)));
+        }
+ 
+        // Click on empty area of noteCell → focus last task or create new
+        noteCell.addEventListener('click', (e) => {
+            if (e.target === noteCell) {
+                const items = noteCell.querySelectorAll('.task-item');
+                if (items.length === 0) {
+                    const newItem = createTaskItem('', false);
+                    noteCell.appendChild(newItem);
+                    newItem.querySelector('.task-text').focus();
+                } else {
+                    items[items.length - 1].querySelector('.task-text').focus();
+                }
+            }
         });
 
         row.appendChild(timeCell);
