@@ -30,6 +30,13 @@ let state = {
     currentUser: null
 };
 
+history.replaceState({ 
+    view: state.view, 
+    year: state.year, 
+    month: state.month, 
+    day: state.day 
+}, '', '');
+
 // --- AUTH LOGIC ---
 let isRegisterMode = false;
 
@@ -127,7 +134,6 @@ function navigateTo(view, params = {}, pushHistory = true) {
     renderView();
 }
 
-// Ακούμε το πάτημα του κουμπιού "Πίσω" του Browser/Κινητού
 window.addEventListener('popstate', (event) => {
     if (event.state) {
         navigateTo(event.state.view, { 
@@ -135,6 +141,13 @@ window.addEventListener('popstate', (event) => {
             month: event.state.month, 
             day: event.state.day 
         }, false); 
+    } else {
+        // If the state is lost, go back to the year view
+        navigateTo('year', {
+            year: new Date().getFullYear(),
+            month: new Date().getMonth(),
+            day: new Date().getDate()
+        }, false);
     }
 });
 
@@ -337,7 +350,6 @@ async function renderDayView(container) {
     container.appendChild(grid);
     grid.appendChild(table);
 
-    // 1. Φτιάχνουμε ΠΡΩΤΑ όλο τον πίνακα και τα κελιά ώστε να φαίνονται αμέσως
     for (let h = 0; h < 24; h++) {
         const row = document.createElement('tr');
         const timeCell = document.createElement('td');
