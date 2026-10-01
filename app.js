@@ -109,13 +109,34 @@ function updateDropdownLabel() {
     btn.innerHTML = `${viewNames[state.view]} <span>&#9662;</span>`;
 }
 
-function navigateTo(view, params = {}) {
+function navigateTo(view, params = {}, pushHistory = true) {
     state.view = view;
     if (params.year !== undefined) state.year = params.year;
     if (params.month !== undefined) state.month = params.month;
     if (params.day !== undefined) state.day = params.day;
+    // Αποθήκευση στο ιστορικό του Browser (χωρίς οπτικό κουμπί)
+    if (pushHistory) {
+        history.pushState({ 
+            view: state.view, 
+            year: state.year, 
+            month: state.month, 
+            day: state.day 
+        }, '', '');
+    }
+    
     renderView();
 }
+
+// Ακούμε το πάτημα του κουμπιού "Πίσω" του Browser/Κινητού
+window.addEventListener('popstate', (event) => {
+    if (event.state) {
+        navigateTo(event.state.view, { 
+            year: event.state.year, 
+            month: event.state.month, 
+            day: event.state.day 
+        }, false); 
+    }
+});
 
 function renderView() {
     const container = document.getElementById('app-container');
@@ -316,29 +337,16 @@ async function renderDayView(container) {
     container.appendChild(grid);
     grid.appendChild(table);
 
-    // --- FIRESTORE LOGIC FOR THIS DAY ---
-    if (!state.currentUser) return;
-    const dateKey = `${state.year}-${String(state.month+1).padStart(2,'0')}-${String(state.day).padStart(2,'0')}`;
-    currentDocRef = doc(db, 'users', state.currentUser.uid, 'plans', dateKey);
-    const docSnap = await getDoc(currentDocRef);
-    const saved = docSnap.exists() ? docSnap.data() : {};
-
+    // 1. Φτιάχνουμε ΠΡΩΤΑ όλο τον πίνακα και τα κελιά ώστε να φαίνονται αμέσως
     for (let h = 0; h < 24; h++) {
         const row = document.createElement('tr');
         const timeCell = document.createElement('td');
         timeCell.className = 'hour-label';
         timeCell.innerText = String(h).padStart(2,'0') + ':00';
-
         const noteCell = document.createElement('td');
         noteCell.className = 'hour-note';
         noteCell.setAttribute('data-hour', h);
 
-        // Load saved tasks or show empty first task
-        const savedTasks = saved[`h${h}`];
-        if (savedTasks && savedTasks.length) {
-            savedTasks.forEach(t => noteCell.appendChild(createTaskItem(t.text, t.done)));
-        }
- 
         // Click on empty area of noteCell → focus last task or create new
         noteCell.addEventListener('click', (e) => {
             if (e.target === noteCell) {
@@ -352,9 +360,28 @@ async function renderDayView(container) {
                 }
             }
         });
-
         row.appendChild(timeCell);
         row.appendChild(noteCell);
         table.appendChild(row);
+    }
+    // --- FIRESTORE LOGIC FOR THIS DAY ---
+    if (!state.currentUser) return;
+    try {
+        const dateKey = `${state.year}-${String(state.month+1).padStart(2,'0')}-${String(state.day).padStart(2,'0')}`;
+        currentDocRef = doc(db, 'users', state.currentUser.uid, 'plans', dateKey);
+        const docSnap = await getDoc(currentDocRef);
+        if (docSnap.exists()) {
+            const saved = docSnap.data();
+            // Load saved tasks or show empty first task
+            for (let h = 0; h < 24; h++) {
+                const savedTasks = saved[`h${h}`];
+                if (savedTasks && savedTasks.length) {
+                    const targetCell = table.querySelector(`.hour-note[data-hour="${h}"]`);
+                    savedTasks.forEach(t => targetCell.appendChild(createTaskItem(t.text, t.done)));
+                }
+            }
+        }
+    } catch (error) {
+        console.error("Firestore Error:", error);
     }
 }
